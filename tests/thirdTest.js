@@ -16,25 +16,24 @@ const assert = require("assert");
     await driver.manage().setTimeouts({ implicit: 2000 });
 
     let textBox = await driver.findElement(By.name("my-text"));
-    let submitButton = await driver.findElement(By.css("button"));
 
     await textBox.sendKeys("Selenium");
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    // await new Promise((resolve) => setTimeout(resolve, 1000));
+    let submitButton = await driver.findElement(By.css("button"));
+
     await submitButton.click();
 
     let message = await driver.findElement(By.id("message"));
     let value = await message.getText();
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    // await new Promise((resolve) => setTimeout(resolve, 2000));
 
     assert.equal("Received!", value);
 
     // Wait for 2 seconds before closing the browser
 
     await driver.navigate().back();
-    await driver.sleep(3000); // ページ読み込みの猶予
-
-    // const titleIs = await driver.getTitle();
-    // console.log("タイトル:", await driver.getTitle());
+    await driver.sleep(3000); // wait until the page is loaded back.  without this sleep, it fails.
 
     await driver.wait(until.titleIs("Web form"));
 
@@ -46,7 +45,7 @@ const assert = require("assert");
     await driver.wait(until.elementIsEnabled(textarea), 5000);
     await textarea.click(); // フォーカスを与える
     await textarea.sendKeys("Mariko0215");
-    await driver.sleep(2000);
+    // await driver.sleep(2000);
 
     // await driver.wait(until.elementLocated(By.name("my-password")), 5000);
     // const passwordField = await driver.findElement(By.name("my-password"));
@@ -76,7 +75,7 @@ const assert = require("assert");
     // await driver.wait(until.elementIsEnabled(textarea), 5000);
     // await textarea.click(); // フォーカスを与える
     await password.sendKeys("Mariko0215");
-    await driver.sleep(1000);
+    // await driver.sleep(1000);
 
     submitButton = await driver.findElement(By.css("button"));
 
@@ -90,6 +89,11 @@ const assert = require("assert");
     assert.equal("Received!", value);
 
     await driver.navigate().refresh();
+    // await driver.sleep(2000);
+
+    const windowSize = await driver.manage().window().getSize();
+    console.log(windowSize.width, windowSize.height);
+    await driver.sleep(2000);
 
     //
   } catch (e) {
