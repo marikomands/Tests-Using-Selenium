@@ -1,7 +1,7 @@
 const { By, Builder, Browser, until } = require("selenium-webdriver");
 const assert = require("assert");
 
-(async function firstTest() {
+(async function thirdTest() {
   let driver;
 
   try {
@@ -16,7 +16,6 @@ const assert = require("assert");
     await driver.manage().setTimeouts({ implicit: 2000 });
 
     let textBox = await driver.findElement(By.name("my-text"));
-
     await textBox.sendKeys("Selenium");
 
     // await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -94,6 +93,8 @@ const assert = require("assert");
     const windowSize = await driver.manage().window().getSize();
     console.log(windowSize.width, windowSize.height);
     await driver.sleep(2000);
+
+    console.log("✅ Test passed: form submitted successfully.");
 
     //
   } catch (e) {

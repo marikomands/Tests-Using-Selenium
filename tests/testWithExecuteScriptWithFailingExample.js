@@ -8,6 +8,7 @@ const { By, Builder, Browser, until } = require("selenium-webdriver");
 
     await driver.navigate().to("http://www.tesco.com");
     // Since this is exact match query it fails.  h=205&;w=205 is not matching
+    // executeScript()を使う場合Javanoコードを文字列として渡さないといけない
     await driver.executeScript(`document.querySelector("img[src='https://digitalcontent.api.tesco.com/v2/media/homepage/5373f026-fdea-47a2-82ea-ce7660bb7a86/Pizzaexpress.jpeg?h=205&;w=205']")
         ?.scrollIntoView();
         `);

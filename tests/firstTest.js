@@ -25,8 +25,9 @@ const assert = require("assert");
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
     assert.equal("Received!", value);
+    console.log("✅ Test passed: form submitted successfully.");
   } catch (e) {
-    console.log(e);
+    console.log("test failed", e);
   } finally {
     await driver.quit();
   }
