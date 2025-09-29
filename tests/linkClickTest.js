@@ -22,6 +22,29 @@ const assert = require("assert");
     await driver.sleep(2000);
 
     console.log("✅ Test passed: element clicked.");
+
+    await driver.get("https://jqueryui.com/tooltip/");
+
+    await driver.sleep(2000); // ページが表示されるか確認
+
+    await driver.switchTo().frame(0); // iframe内にあるので切り替えが必要
+
+    title = await driver.getTitle();
+    assert.equal("Tooltip | jQuery UI", title);
+
+    const ageInput = await driver.wait(
+      until.elementLocated(By.id("age")),
+      1000
+    );
+    await driver
+      .actions()
+      .move({ origin: ageInput })
+      .contextClick(ageInput)
+      .sendKeys("44")
+      .perform();
+
+    await driver.sleep(2000);
+    console.log("✅ Test passed: Text inputted.");
   } catch (e) {
     console.error("❌ Test failed:", e);
   } finally {
