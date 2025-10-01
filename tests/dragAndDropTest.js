@@ -26,6 +26,7 @@ const assert = require("assert");
     await driver.sleep(2000);
   } catch (e) {
     console.error("❌ Test failed:", e);
+    throw e;
   } finally {
     await driver.quit();
   }
